@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AES Algorithm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="asset/style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="asset/script.js"></script>
+</head>
+
+<body class="bg-[#021526] text-white">
+  <script>
+    // Pilih semua link navbar yang memiliki href dengan hash (#)
+    const navbarLinks = document.querySelectorAll('nav a[href^="#"]');
+
+    navbarLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault(); // Mencegah default anchor behavior
+        const targetId = this.getAttribute('href'); // Ambil id target dari href
+        const targetElement = document.querySelector(targetId); // Cari elemen target
+
+        if (targetElement) {
+          // Smooth scroll ke elemen target
+          targetElement.scrollIntoView({
+            behavior: 'smooth', // Efek scrolling halus
+            block: 'start', // Posisikan di atas
+          });
+        }
+      });
+    });
+  </script>
+
+
+  <!-- Navbar section -->
+  <nav class="bg-gray-800 p-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <a class="text-white text-lg font-semibold" href="#">Aescrypt</a>
+      <button class="text-white focus:outline-none lg:hidden" id="navbar-toggle">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+      <div class="hidden lg:flex space-x-4" id="navbar-menu">
+        <a class="text-white hover:bg-gray-700 px-3 py-2 rounded" href="home.html">Home</a>
+        <a class="text-white hover:bg-gray-700 px-3 py-2 rounded" href="#about">About</a>
+
+        <!-- Dropdown for Generate -->
+        <div class="relative">
+          <button class="text-white hover:bg-gray-700 px-3 py-2 rounded" id="generate-dropdown">
+            Generate
+            <svg class="w-4 h-4 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="dropdown-menu" class="hidden absolute bg-gray-800 text-white w-40 py-2 mt-2 rounded shadow-lg">
+            <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="choose.html">Generate text</a>
+            <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="file.html">Generate File</a>
+          </div>
+        </div>
+        <!-- Dropdown for Generate end-->
+        <!-- Dropdown for Profile -->
+      <div class="relative">
+        <button class="text-white hover:bg-gray-700 px-3 py-2 rounded" id="profile-dropdown">
+          Profile
+          <svg class="w-4 h-4 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div id="profile-menu" class="hidden absolute bg-gray-800 text-white w-40 py-2 mt-2 rounded shadow-lg">
+          <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="profile.html">My Profile</a>
+          <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="index.html">Logout</a>
+        </div>
+      </div>
+      <!-- Dropdown for Profile end-->
+       
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    // Toggle dropdown menu visibility for generate
+    const generateButton = document.getElementById('generate-dropdown');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+
+    generateButton.addEventListener('click', () => {
+      dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdown if clicking outside the dropdown
+    document.addEventListener('click', (event) => {
+      if (!generateButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+        dropdownMenu.classList.add('hidden');
+      }
+    });
+
+     // Toggle dropdown menu visibility for Profile
+  const profileButton = document.getElementById('profile-dropdown');
+  const profileMenu = document.getElementById('profile-menu');
+
+  profileButton.addEventListener('click', () => {
+    profileMenu.classList.toggle('hidden');
+  });
+
+  // Close dropdown if clicking outside the Profile dropdown
+  document.addEventListener('click', (event) => {
+    if (!profileButton.contains(event.target) && !profileMenu.contains(event.target)) {
+      profileMenu.classList.add('hidden');
+    }
+  });
+  </script>
+
+
+  <!-- Figure Section -->
+  <section class="mx-auto my-10 px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <img src="asset/png/pexels-tima-miroshnichenko-5380664.jpg" alt="Keamanan Basis Data"
+          class="rounded-lg shadow-lg shadow-gray-600 w-full h-auto object-cover">
+      </div>
+      <div class="rounded-xl p-8 bg-gradient-to-r from-gray-800 to-gray-900 shadow-xl">
+        <p class="typewriter-text text-justify text-lg leading-relaxed text-gray-300 font-medium tracking-wide"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- figure section end  -->
+
+
+  <!-- Profile Section -->
+  <section id="about" class="text-center my-8 px-6">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <!-- Logo NIST -->
+      <img src="asset/png/nist.webp" alt="logo nist" class="w-36 h-36 mx-auto rounded-full shadow-md shadow-gray-500">
+
+      <!-- Heading -->
+      <h2 class="text-2xl font-bold mt-6 text-teal-400">
+        <a href="https://www.nist.gov/" target="_blank" rel="noopener noreferrer" class="hover-link">
+          National Institute of Standards and Technology
+        </a>
+      </h2>
+
+
+      <!-- Description -->
+      <p class="mt-4 leading-relaxed text-gray-300">
+        NIST adalah singkatan dari <span class="font-semibold text-teal-400">National Institute of Standards and
+          Technology</span>.
+        Ini adalah lembaga standar nasional di Amerika Serikat yang berada di bawah Departemen Perdagangan AS. Didirikan
+        pada tahun
+        <span class="font-semibold text-teal-400">1901</span>, NIST bertanggung jawab untuk mengembangkan standar dan
+        panduan teknis di berbagai bidang, termasuk
+        <span class="font-semibold text-teal-400">teknologi informasi</span>, <span
+          class="font-semibold text-teal-400">keamanan siber</span>,
+        <span class="font-semibold text-teal-400">metrologi (ilmu pengukuran)</span>, dan <span
+          class="font-semibold text-teal-400">teknologi fisika</span>.
+      </p>
+    </div>
+  </section>
+  <!-- profile section end  -->
+
+  <!-- Definition Section -->
+  <section id="define" class="container mx-auto my-10 px-4">
+    <section class="container mx-auto px-4 my-10">
+      <h3 class="text-3xl font-bold mb-4 border-b-4 border-gradient-to-r from-gray-600 to-gray-400 pb-2 text-gray-200">
+        Enkripsi Advanced Encryption Standard (AES)
+      </h3>
+      <p class="leading-8 mb-6 text-gray-300 text-justify tracking-wide">
+        Advanced Encryption Standard (AES) adalah sebuah standar enkripsi simetris yang digunakan untuk melindungi
+        informasi yang sensitif.
+        AES merupakan salah satu algoritme enkripsi yang paling umum digunakan di seluruh dunia dan telah diadopsi
+        secara luas oleh pemerintah,
+        industri, dan organisasi lainnya untuk melindungi data sensitif. Algoritma AES ini sebenarnya merupakan
+        peningkatan dari algoritma DES
+        yang cara kerjanya tidak jauh berbeda. Untuk cara kerjanya terbilang sangat kompleks untuk dipahami, karena
+        sejujurnya saya saja masih bingung
+        dengan cara kerjanya. Tanpa berlama-lama, langsung saja kita masuk ke cara kerja dari algoritma AES ini.
+      </p>
+
+      <div class="mb-10">
+        <h4 class="text-2xl font-bold mb-6 text-teal-400 border-b-2 border-gray-600 pb-2">
+          Cara Kerja Algoritma AES
+        </h4>
+        <p class="mb-6 leading-7 text-gray-300">
+          Cara kerja enkripsi ini kita kelompokkan ke dalam beberapa tahapan, yaitu:
+        </p>
+
+        <!-- Card 1: Inisialisasi -->
+        <div class="mb-6 bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+          <h5 class="text-xl font-semibold mb-4 text-teal-400">1. Inisialisasi</h5>
+          <p class="leading-relaxed text-gray-300">
+            Langkah pertama dalam proses enkripsi AES adalah inisialisasi. Pada tahap ini, data yang akan dienkripsi
+            dibagi menjadi blok-blok yang sama besar, dan kunci enkripsi yang telah ditentukan sebelumnya juga
+            disiapkan. Ukuran blok standar untuk AES adalah 128 bit.
+          </p>
+        </div>
+
+        <!-- Card 2: Substitusi Byte (SubBytes) -->
+        <div class="mb-6 bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+          <h5 class="text-xl font-semibold mb-4 text-teal-400">2. Substitusi Byte (SubBytes)</h5>
+          <p class="leading-relaxed text-gray-300">
+            Substitusi adalah salah satu langkah penting yang terjadi selama proses enkripsi. Langkah ini digunakan
+            untuk mengubah setiap byte dari blok data plaintext (pesan asli) menjadi byte yang berbeda menggunakan suatu
+            tabel substitusi tetap.
+          </p>
+          <h6 class="text-lg font-semibold mb-4 text-teal-400">A. Peta Substitusi (S-Box)</h6>
+          <p class="leading-relaxed mb-4 text-gray-300">
+            AES menggunakan tabel yang disebut S-Box (Substitution Box) untuk menggantikan setiap byte dari blok data
+            dengan byte baru. Tabel S-Box ini bersifat tetap dan memiliki ukuran 16x16, berisi 256 entri yang dihasilkan
+            dari operasi matematika yang kompleks.
+          </p>
+          <ul class="list-disc list-inside mb-4 text-gray-300">
+            <li class="leading-relaxed mb-2">
+              <strong class="text-teal-400">Inversi dalam GF(2^8):</strong> AES menggunakan operasi matematika dalam
+              ruang Galois 8-bit (GF(2^8)) untuk menghasilkan invers dari setiap byte dalam blok data.
+            </li>
+            <li class="leading-relaxed mb-2">
+              <strong class="text-teal-400">Afiksasi Polinomial:</strong> Setelah invers dilakukan, hasilnya
+              dimodifikasi dengan aplikasi polinomial yang menghasilkan perubahan untuk menghindari pola yang dapat
+              digunakan dalam analisis kriptografi.
+            </li>
+          </ul>
+          <h6 class="text-md font-semibold mb-2 text-teal-400">Gambaran Tabel S-Box</h6>
+          <div class="flex justify-start">
+            <img src="asset/png/tabel.jpeg" class="max-w-full w-full h-auto rounded-lg shadow-md shadow-gray-500 mb-4"
+              alt="Tabel S-Box">
+          </div>
+        </div>
+
+        <!-- Card 3: Bermutasi Baris (ShiftRows) -->
+        <div class="mb-6 bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+          <h5 class="text-xl font-semibold mb-4 text-teal-400">3. Bermutasi Baris (ShiftRows)</h5>
+          <p class="leading-relaxed text-gray-300">
+            Setelah substitusi byte, langkah selanjutnya adalah permutasi baris (ShiftRows). Pada tahap ini, setiap
+            baris dalam blok data bergeser secara sirkular ke kiri sebanyak langkah yang ditentukan. Tujuan dari
+            permutasi baris adalah untuk meningkatkan difusi data di seluruh blok.
+          </p>
+        </div>
+
+        <!-- Card 4: Pencampuran Kolom (MixColumns) -->
+        <div class="mb-6 bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+          <h5 class="text-xl font-semibold mb-4 text-teal-400">4. Pencampuran Kolom (MixColumns)</h5>
+          <p class="leading-relaxed text-gray-300">
+            Setelah permutasi baris, blok data akan melalui tahap pencampuran kolom (MixColumns). Pada tahap ini, setiap
+            kolom blok data diubah dengan transformasi linier menggunakan operasi matriks. Transformasi ini membantu
+            dalam mengacak data di dalam blok.
+          </p>
+        </div>
+
+        <!-- Card 5: Putaran Kunci (Round Key Addition) -->
+        <div class="mb-6 bg-gray-800 p-6 rounded-lg shadow-lg transition-transform duration-300 hover:scale-105">
+          <h5 class="text-xl font-semibold mb-4 text-teal-400">5. Putaran Kunci (Round Key Addition)</h5>
+          <p class="leading-relaxed text-gray-300">
+            Selanjutnya, blok data akan dienkripsi dengan kunci ronde (round key) yang dihasilkan dari kunci enkripsi
+            utama. Kunci ronde ditambahkan secara bitwise ke blok data. Proses ini membantu dalam meningkatkan keamanan
+            dan kekuatan enkripsi AES.
+          </p>
+        </div>
+      </div>
+
+      <div class="more leading-relaxed text-gray-300 pl-6">
+        <p>
+            Untuk mengetahui lebih lanjut mengenai algoritma enkripsi AES, klik disini
+            <a href="https://formaestudio.com/rijndaelinspector/archivos/Rijndael_Animation_v4_eng-html5.html" 
+               class="text-blue-500 hover:text-blue-300 transition-colors duration-300">pelajari lebih lanjut</a>.
+        </p>
+    </div>
+    </section>
+
+
+
+
+
+    <!-- Cards Section -->
+    <section id="criterion" class="container mx-auto mb-10 px-8 pt-20">
+      <h1 class="text-center text-2xl font-bold mb-6 bg-gray-800 text-white py-2 px-4 rounded-lg">
+        Keunggulan Advanced Encryption Standard (AES)
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Card pertama: Animasi swipe-in dari kiri -->
+        <div class="bg-gray-800 rounded-lg shadow-lg shadow-gray-400 p-4 mb-6" data-aos="fade-left"
+          data-aos-duration="800">
+          <img src="asset/png/aman.jpg" alt="Keamanan Tinggi" class="rounded-t-lg mb-4 w-full h-48 object-cover">
+          <h5 class="text-xl font-bold mb-2">Keamanan Tinggi</h5>
+          <p class="text-sm">AES menggunakan kunci besar (128, 192, atau 256 bit) sehingga sangat sulit ditembus dengan
+            brute-force.</p>
+        </div>
+
+        <!-- Card kedua: Animasi swipe-in dari atas -->
+        <div class="bg-gray-800 rounded-lg shadow-lg shadow-gray-400 p-4 mb-6" data-aos="fade-left"
+          data-aos-duration="800">
+          <img src="asset/png/cepat.webp" alt="Kecepatan Tinggi" class="rounded-t-lg mb-4 w-full h-48 object-cover">
+          <h5 class="text-xl font-bold mb-2">Kecepatan Tinggi</h5>
+          <p class="text-sm">AES cepat dalam enkripsi dan dekripsi, cocok untuk aplikasi yang membutuhkan pemrosesan
+            data cepat.</p>
+        </div>
+
+        <!-- Card ketiga: Animasi swipe-in dari kanan -->
+        <div class="bg-gray-800 rounded-lg shadow-lg shadow-gray-400 p-4 mb-6" data-aos="fade-left"
+          data-aos-duration="800">
+          <img src="asset/png/efisien.webp" alt="Multi Efisiensi" class="rounded-t-lg mb-4 w-full h-48 object-cover">
+          <h5 class="text-xl font-bold mb-2">Multi Efisiensi</h5>
+          <p class="text-sm">AES bekerja baik di komputer maupun perangkat mobile, sehingga cocok untuk berbagai
+            platform.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- end of card -->
+
+    <!-- Cards Section 2 -->
+    <section id="criterion" class="container mx-auto mb-10 px-8">
+      <h1 class="text-center text-2xl font-bold mb-6 bg-gray-800 text-white py-2 px-4 rounded-lg">
+        Kelemahan Advanced Encryption Standard (AES)
+      </h1>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-gray-800 rounded-lg shadow-lg shadow-gray-400  p-4 mb-6" data-aos="fade-right"
+          data-aos-duration="800">
+          <img src="asset/png/bf.webp" alt="Keamanan Tinggi" class="rounded-t-lg mb-4 w-full h-48 object-cover">
+          <h5 class="text-xl font-bold mb-2">Serangan brute force</h5>
+          <p class="text-sm">
+            menggunakan kunci yang lemah atau pendek (seperti AES-128), serangan brute-force masih bisa memecah enkripsi,
+            meskipun AES-128 secara teoritis sudah sangat kuat.
+          </p>
+        </div>
+        <div class="bg-gray-800 rounded-lg shadow-lg shadow-gray-400  p-4 mb-6" data-aos="fade-right"
+          data-aos-duration="1000">
+          <img src="asset/png/os.webp" alt="Kecepatan Tinggi" class="rounded-t-lg mb-4 w-full h-48 object-cover">
+          <h5 class="text-xl font-bold mb-2">Mode Operasi yang Tidak Tepat</h5>
+          <p class="text-sm">
+            Mode operasi AES yang berbeda (seperti ECB, CBC, atau GCM)
+            sangat rentan terhadap pola yang dapat dieksploitasi dalam data yang sama, karena setiap blok data akan dienkripsi dengan cara yang sama.
+          </p>
+        </div>
+        <div class="bg-gray-800 rounded-lg shadow-lg shadow-gray-400  p-4 mb-6" data-aos="fade-right"
+          data-aos-duration="1200">
+          <img src="asset/png/rss.webp" alt="Multi Efisiensi" class="rounded-t-lg mb-4 w-full h-48 object-cover">
+          <h5 class="text-xl font-bold mb-2">Rentanan terhadap Serangan</h5>
+          <p class="text-sm">Meskipun AES sendiri sangat aman jika diimplementasikan dengan benar, 
+                            implementasi yang buruk atau kesalahan dalam penggunaannya dapat membuka potensi untuk serangan. </p>
+        </div>
+      </div>
+    </section>
+    <!-- end of card2 -->
+
+
+
+
+    <!-- Footer -->
+
+    <footer class="bg-gray-900 text-gray-300 py-8 mt-10">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center md:items-start space-y-4 md:space-y-0">
+          <!-- Logo -->
+          <div class="flex justify-center md:justify-start mb-4 md:mb-0">
+            <img src="asset/png/aes.webp" alt="AES Logo" class="w-24 h-24">
+          </div>
+
+          <!-- Teks copyright di tengah -->
+          <div class="text-center mt-8 md:mt-8 lg:sticky absolute lg:pt-0 pt-36">
+            <p class="text-lg md:text-xl">Copyright (c) 2024 xenny Ramzy</p>
+          </div>
+          <!-- Ikon Sosial Media -->
+          <div class="flex justify-center md:justify-end space-x-6 mt-6 md:mt-0">
+            <a href="https://www.instagram.com/sooyaaa__/" class="hover:opacity-75">
+              <img src="https://clipartcraft.com/images/instagram-logo-transparent-background-2.png" alt="Instagram"
+                class="w-8 h-8">
+            </a>
+            <a href="https://github.com/deaafrizal/" class="hover:opacity-75">
+              <img src="https://th.bing.com/th/id/OIP.eoZPB2gfGH-1ckaL_JSZdwHaHg" alt="GitHub" class="w-8 h-8">
+            </a>
+            <a href="https://x.com/gibran_tweet" class="hover:opacity-75">
+              <img src="https://th.bing.com/th/id/OIP.ZweGejPwbT5wwshQ2-8qUQHaHa" alt="Twitter" class="w-8 h-8">
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer section end -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+      var typed = new Typed(".typewriter-text", {
+        strings: ["Dalam era digital saat ini, data menjadi aset penting bagi organisasi, perusahaan, dan individu. Dengan meningkatnya ketergantungan pada sistem informasi dan basis data, ancaman keamanan terhadap data juga semakin tinggi. Sistem keamanan basis data mencakup berbagai metode seperti autentikasi, otorisasi, kontrol akses, dan enkripsi. Enkripsi merupakan salah satu metode utama untuk menjaga kerahasiaan data, bahkan jika data tersebut berhasil diakses secara tidak sah."],
+        typeSpeed: 10,
+        loop: false
+      })
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+</body>
+
+</html>

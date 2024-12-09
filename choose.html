@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Beranda - Aescrypt Aplikasi Enkripsi dengan Algoritma AES</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Aescrypt adalah aplikasi untuk mengenkripsi dan mendekripsi teks dengan algoritma AES."
+    />
+    <meta
+      name="keywords"
+      content="aes, aes encryption, aes decryption, aes encrypt,"
+    />
+    <meta name="author" content="Syauqizaidan Khairan Khalaf" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* CSS */
+      :root {
+        font-family: "Inter", sans-serif;
+      }
+      @supports (font-variation-settings: normal) {
+        :root {
+          font-family: "Inter var", sans-serif;
+        }
+      }
+    </style>
+     <link rel="stylesheet" href="asset/style.css">
+     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+     <script src="asset/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+  </head>
+  <body class="bg-[#021526]">
+    
+    <script>
+      // Pilih semua link navbar yang memiliki href dengan hash (#)
+      const navbarLinks = document.querySelectorAll('nav a[href^="#"]');
+  
+      navbarLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault(); // Mencegah default anchor behavior
+          const targetId = this.getAttribute('href'); // Ambil id target dari href
+          const targetElement = document.querySelector(targetId); // Cari elemen target
+  
+          if (targetElement) {
+            // Smooth scroll ke elemen target
+            targetElement.scrollIntoView({
+              behavior: 'smooth', // Efek scrolling halus
+              block: 'start', // Posisikan di atas
+            });
+          }
+        });
+      });
+    </script>
+  
+  
+    <!-- Navbar section -->
+    <nav class="bg-gray-800 p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <a class="text-white text-lg font-semibold" href="#">Aescrypt</a>
+        <button class="text-white focus:outline-none lg:hidden" id="navbar-toggle">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+        <div class="hidden lg:flex space-x-4" id="navbar-menu">
+          <a class="text-white hover:bg-gray-700 px-3 py-2 rounded" href="home.html">Home</a>
+          <a class="text-white hover:bg-gray-700 px-3 py-2 rounded" href="home.html">About</a>
+  
+          <!-- Dropdown for Generate -->
+          <div class="relative">
+            <button class="text-white hover:bg-gray-700 px-3 py-2 rounded" id="generate-dropdown">
+              Generate
+              <svg class="w-4 h-4 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="dropdown-menu" class="hidden absolute bg-gray-800 text-white w-40 py-2 mt-2 rounded shadow-lg">
+              <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="choose.html">Generate text</a>
+              <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="file.html">Generate File</a>
+            </div>
+          </div>
+          <!-- Dropdown for Generate end-->
+          <!-- Dropdown for Profile -->
+        <div class="relative">
+          <button class="text-white hover:bg-gray-700 px-3 py-2 rounded" id="profile-dropdown">
+            Profile
+            <svg class="w-4 h-4 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="profile-menu" class="hidden absolute bg-gray-800 text-white w-40 py-2 mt-2 rounded shadow-lg">
+            <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="profile.html">My Profile</a>
+            <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="index.html">Logout</a>
+          </div>
+        </div>
+        <!-- Dropdown for Profile end-->
+         
+        </div>
+      </div>
+    </nav>
+  
+    <script>
+      // Toggle dropdown menu visibility for generate
+      const generateButton = document.getElementById('generate-dropdown');
+      const dropdownMenu = document.getElementById('dropdown-menu');
+  
+      generateButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('hidden');
+      });
+  
+      // Close dropdown if clicking outside the dropdown
+      document.addEventListener('click', (event) => {
+        if (!generateButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+          dropdownMenu.classList.add('hidden');
+        }
+      });
+  
+       // Toggle dropdown menu visibility for Profile
+    const profileButton = document.getElementById('profile-dropdown');
+    const profileMenu = document.getElementById('profile-menu');
+  
+    profileButton.addEventListener('click', () => {
+      profileMenu.classList.toggle('hidden');
+    });
+  
+    // Close dropdown if clicking outside the Profile dropdown
+    document.addEventListener('click', (event) => {
+      if (!profileButton.contains(event.target) && !profileMenu.contains(event.target)) {
+        profileMenu.classList.add('hidden');
+      }
+    });
+    </script>
+      
+      
+<!-- navbar section end -->
+    <!-- <div class="isolate overflow-hidden bg-gray-900 h-100">
+      <svg
+        class="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern
+            id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc"
+            width="200"
+            height="200"
+            x="50%"
+            y="-1"
+            patternUnits="userSpaceOnUse"
+          >
+            <path d="M.5 200V.5H200" fill="none" />
+          </pattern>
+        </defs>
+        <svg x="50%" y="-1" class="overflow-visible fill-gray-800/20">
+          <path
+            d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+            stroke-width="0"
+          />
+        </svg>
+        <rect
+          width="100%"
+          height="100%"
+          stroke-width="0"
+          fill="url(#983e3e4c-de6d-4c3f-8d64-b9761d1534cc)"
+        />
+      </svg>
+      <svg
+        viewBox="0 0 1108 632"
+        aria-hidden="true"
+        class="absolute top-10 left-[calc(50%-4rem)] -z-10 w-[69.25rem] max-w-none transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]"
+      >
+        <path
+          fill="url(#175c433f-44f6-4d59-93f0-c5c51ad5566d)"
+          fill-opacity=".2"
+          d="M235.233 402.609 57.541 321.573.83 631.05l234.404-228.441 320.018 145.945c-65.036-115.261-134.286-322.756 109.01-230.655C968.382 433.026 1031 651.247 1092.23 459.36c48.98-153.51-34.51-321.107-82.37-385.717L810.952 324.222 648.261.088 235.233 402.609Z"
+        />
+        <defs>
+          <linearGradient
+            id="175c433f-44f6-4d59-93f0-c5c51ad5566d"
+            x1="1220.59"
+            x2="-85.053"
+            y1="432.766"
+            y2="638.714"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stop-color="#4F46E5"></stop>
+            <stop offset="1" stop-color="#80CAFF"></stop>
+          </linearGradient>
+        </defs>
+      </svg> -->
+      <div
+        class="mx-auto my-auto max-w-9xl px-6 sm:pb-32 lg:flex h-screen lg:px-8 pt-32"
+      >
+        <div
+          class="mx-auto my-auto max-w-2xl flex-shrink-0 lg:mx-auto lg:max-w-4xl lg:pt-8"
+        >
+         
+          <h1
+            class="mt-10 text-center text-4xl font-bold tracking-tight text-white sm:text-6xl"
+          >
+            🔐 Enkripsi dan Dekripsi Pesan Anda dengan Mudah dan Aman
+          </h1>
+          <p
+            class="mt-6 text-center text-md leading-snug md:text-lg leading-8 text-gray-300"
+          >
+            Dengan algoritma dan logika enkripsi kami, anda dapat mengenkripsi
+            pesan anda dengan aman dan anda bisa atur sendiri password nya
+            sehingga tidak sembarang orang bisa mendekripsinya.
+          </p>
+          <div class="mt-10 mx-auto flex justify-center items-center gap-x-6">
+            <a
+              href="encrypt.html"
+              class="rounded-md bg-indigo-500 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+              >Enkripsi Pesan</a
+            >
+            <a
+              href="decrypt.html"
+              class="rounded-md bg-indigo-500 px-3.5 py-1.5 text-base font-semibold leading-7 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+              >Dekripsi Pesan</a
+            >
+          </div>
+        </div>
+      </div>
+    </div> 
+  </body>
+  
+</html>

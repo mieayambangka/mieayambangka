@@ -1,0 +1,18 @@
+.button-back {
+    background-color: #5e4b8a; /* Warna ungu gelap */
+    border: none; /* Menghilangkan border default */
+    padding: 10px 20px; /* Menambahkan padding untuk tombol */
+    border-radius: 5px; /* Menambahkan sudut melengkung */
+    cursor: pointer; /* Mengubah kursor saat hover */
+}
+
+.button-back a {
+    text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+    color: white; /* Mengatur warna teks menjadi putih */
+}
+
+.button-back:hover {
+    background-color: #4a3a6a; /* Warna saat hover */
+}
+
+

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AES Algorithm</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="asset/style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="asset/script.js"></script>
+
+  
+</head>
+
+<body class="bg-[#021526] text-white">
+    <script>
+        // Pilih semua link navbar yang memiliki href dengan hash (#)
+        const navbarLinks = document.querySelectorAll('nav a[href^="#"]');
+    
+        navbarLinks.forEach(link => {
+          link.addEventListener('click', function (e) {
+            e.preventDefault(); // Mencegah default anchor behavior
+            const targetId = this.getAttribute('href'); // Ambil id target dari href
+            const targetElement = document.querySelector(targetId); // Cari elemen target
+    
+            if (targetElement) {
+              // Smooth scroll ke elemen target
+              targetElement.scrollIntoView({
+                behavior: 'smooth', // Efek scrolling halus
+                block: 'start', // Posisikan di atas
+              });
+            }
+          });
+        });
+      </script>
+    
+    
+      <!-- Navbar section -->
+      <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+          <a class="text-white text-lg font-semibold" href="#">Aescrypt</a>
+          <button class="text-white focus:outline-none lg:hidden" id="navbar-toggle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+          <div class="hidden lg:flex space-x-4" id="navbar-menu">
+            <a class="text-white hover:bg-gray-700 px-3 py-2 rounded" href="home.html">Home</a>
+            <a class="text-white hover:bg-gray-700 px-3 py-2 rounded" href="home.html">About</a>
+    
+            <!-- Dropdown for Generate -->
+            <div class="relative">
+              <button class="text-white hover:bg-gray-700 px-3 py-2 rounded" id="generate-dropdown">
+                Generate
+                <svg class="w-4 h-4 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div id="dropdown-menu" class="hidden absolute bg-gray-800 text-white w-40 py-2 mt-2 rounded shadow-lg">
+                <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="choose.html">Generate text</a>
+                <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="file.html">Generate File</a>
+              </div>
+            </div>
+            <!-- Dropdown for Generate end-->
+            <!-- Dropdown for Profile -->
+          <div class="relative">
+            <button class="text-white hover:bg-gray-700 px-3 py-2 rounded" id="profile-dropdown">
+              Profile
+              <svg class="w-4 h-4 inline-block ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="profile-menu" class="hidden absolute bg-gray-800 text-white w-40 py-2 mt-2 rounded shadow-lg">
+              <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="profile.html">My Profile</a>
+              <a class="block px-4 py-2 text-sm hover:bg-gray-700" href="index.html">Logout</a>
+            </div>
+          </div>
+          <!-- Dropdown for Profile end-->
+           
+          </div>
+        </div>
+      </nav>
+    
+      <script>
+        // Toggle dropdown menu visibility for generate
+        const generateButton = document.getElementById('generate-dropdown');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+    
+        generateButton.addEventListener('click', () => {
+          dropdownMenu.classList.toggle('hidden');
+        });
+    
+        // Close dropdown if clicking outside the dropdown
+        document.addEventListener('click', (event) => {
+          if (!generateButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+    
+         // Toggle dropdown menu visibility for Profile
+      const profileButton = document.getElementById('profile-dropdown');
+      const profileMenu = document.getElementById('profile-menu');
+    
+      profileButton.addEventListener('click', () => {
+        profileMenu.classList.toggle('hidden');
+      });
+    
+      // Close dropdown if clicking outside the Profile dropdown
+      document.addEventListener('click', (event) => {
+        if (!profileButton.contains(event.target) && !profileMenu.contains(event.target)) {
+          profileMenu.classList.add('hidden');
+        }
+      });
+      </script>
+
+<h1 class="text-center text-4xl font-bold text-gray-200 mb-4 mt-8">Keamanan Basis Data</h1>
+<h2 class="text-center text-2xl font-medium text-gray-200 mb-6">Kelompok 1</h2>
+
+
+
+
+<div class="container mx-auto p-6">
+    <!-- 1 Row with 3 Cards for 3 People -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 rounded-lg shadow-2xl transform transition-transform hover:scale-105">
+        <div class="flex flex-col items-center">
+          <img src="asset/png/james.jpg" alt="Avatar" class="w-24 h-24 rounded-full mb-4">
+          <h4 class="text-xl font-semibold">Wildan Asrofi</h4>
+          <p class="text-gray-400">19231829</p>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 rounded-lg shadow-2xl transform transition-transform hover:scale-105">
+        <div class="flex flex-col items-center">
+          <img src="asset/png/aaw.jpg" alt="Avatar" class="w-24 h-24 rounded-full mb-4">
+          <h4 class="text-xl font-semibold">Deny Aulia Ramzy</h4>
+          <p class="text-gray-400">19231029</p>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 rounded-lg shadow-2xl transform transition-transform hover:scale-105">
+        <div class="flex flex-col items-center">
+          <img src="asset/png/tom.jpg" alt="Avatar" class="w-24 h-24 rounded-full mb-4">
+          <h4 class="text-xl font-semibold">Nadhif</h4>
+          <p class="text-gray-400">19230930</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- 1 Row with 2 Cards for 2 People -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+      <!-- Card 4 -->
+      <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 rounded-lg shadow-2xl transform transition-transform hover:scale-105">
+        <div class="flex flex-col items-center">
+          <img src="asset/png/Alyssa_wiki.webp" alt="Avatar" class="w-24 h-24 rounded-full mb-4">
+          <h4 class="text-xl font-semibold">Alya Darmawati</h4>
+          <p class="text-gray-400">19232144</p>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="bg-gradient-to-r from-gray-800 to-gray-900 text-white p-6 rounded-lg shadow-2xl transform transition-transform hover:scale-105">
+        <div class="flex flex-col items-center">
+          <img src="asset/png/alma-moore-photo-u1.jpg" alt="Avatar" class="w-24 h-24 rounded-full mb-4">
+          <h4 class="text-xl font-semibold">Friskila Siregar</h4>
+          <p class="text-gray-400">19230876r</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

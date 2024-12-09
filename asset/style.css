@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+  
+@media (max-width: 768px) {
+  /* Sesuaikan lebar elemen untuk perangkat kecil */
+  .some-element {
+      width: 100%;
+  }
+}
+/* responsive navbar */
+/* Default style untuk desktop */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 10px; /* Jarak antar item navbar */
+}
+
+/* Untuk layar kecil (max-width 768px) */
+@media (max-width: 768px) {
+  .navbar ul {
+      display: none; /* Sembunyikan menu pada layar kecil */
+      width: 100%; /* Pastikan menu mengambil lebar penuh */
+      flex-direction: column; /* Susun menu vertikal */
+  }
+
+  .navbar.open ul {
+      display: flex; /* Tampilkan menu saat tombol hamburger diklik */
+  }
+
+  .hamburger {
+      display: block; /* Tampilkan tombol hamburger */
+      cursor: pointer;
+  }
+}
+
+/* responsive navbar */
+.hover-link {
+  color: #38b2ac; /* Warna default (teal-400) */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Efek transisi */
+}
+
+.hover-link:hover {
+  color: #2c7a7b; /* Warna saat di-hover (teal-600 atau custom) */
+}
+
